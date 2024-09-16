@@ -1,0 +1,110 @@
+service: ${env:APP_NAME}-api
+
+frameworkVersion: '>=2.0.0 <4.0.0'
+
+plugins:
+  - serverless-esbuild
+  - serverless-dynamodb
+  - serverless-offline
+
+custom:
+  apiCorsOrigin: '*'
+  deletionPolicy:
+    local: 'Delete'
+    staging: 'Delete'
+    prod: 'Retain'
+  updatePolicy:
+    local: 'Delete'
+    staging: 'Delete'
+    prod: 'Retain'
+  esbuildAWSExclude: # patch to include aws sdk v3 when running locally, hopefully serverless-offline fixes in the future
+    local: ''
+    staging: '@aws-sdk'
+    prod: '@aws-sdk'
+  esbuild:
+    minify: false
+    packager: pnpm
+    keepOutputDirectory: true
+    sourcemap: linked # to reduce the size of deployed code you can remove source maps
+    exclude:
+      - ${self:custom.esbuildAWSExclude.${opt:stage}}
+    watch:
+      pattern: 'src/**/*.ts'
+      ignore: 'scripts/**/* .build/**/* .dynamodb/**/* .serverless/**/* .esbuild/**/* node_modules/**/*'
+  serverless-dynamodb:
+    stages:
+      - local
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      local:
+        sources:
+          - table: ${env:APP_NAME}-${opt:stage}-admin
+            sources: [./src/baseblocks/admin/admin.seed.json]
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: nodejs20.x
+  profile: ${env:AWS_PROFILE}
+  stage: ${opt:stage}
+  stackTags:
+    AppName: ${env:APP_NAME}
+    Stage: ${opt:stage}
+    Region: ${opt:region}
+    Product: Baseline
+  timeout: 30
+  architecture: arm64
+  memorySize: 2048
+  logRetentionInDays: 90
+  versionFunctions: false
+  endpointType: REGIONAL
+  # The environment variables are accessible in all of the lambda functions since if a service is coupled to another
+  # by a route then the service will need to have access to the environment variables it needs. Environment variables
+  # that should only ever be in a specific service route can be defined on the functions.[service].environment
+  environment:
+    APP_NAME: ${env:APP_NAME}
+    NODE_OPTIONS: --enable-source-maps # Lambda will report correct stacktrace location based on source maps
+    NODE_ENV: ${opt:stage}
+    API_REGION: ${opt:region}
+    API_CORS_ORIGIN: ${self:custom.apiCorsOrigin}
+    COGNITO_USER_POOL_ID:
+      # 'ap-southeast-2_zADQdNgNo' # If manually specifying, format expected "ap-southeast-2_zADQdNgNo"
+      Ref: CognitoUserPool # For local add/invite user operations, comment this line out and uncomment above and set correct user pool id
+  apiGateway:
+    minimumCompressionSize: 1024
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:BatchGetItem
+          Resource:
+            - !Sub ${adminTable.Arn}
+            - !Sub ${adminTable.Arn}/index/*
+        - Effect: Allow
+          Action:
+            - cognito-idp:AdminCreateUser
+            - cognito-idp:AdminGetUser
+            - cognito-idp:ListUsers
+          Resource:
+            - !Sub ${CognitoUserPool.Arn}
+
+resources:
+  - ${file(./src/baseblocks/cognito/cognito-resources.yml)}
+  - ${file(./src/baseblocks/admin/admin-dynamodb.yml)}
+
+functions:
+  - ${file(./src/baseblocks/admin/admin-functions.yml)}
