@@ -125,14 +125,13 @@ const ChatContent = (): JSX.Element => {
             }
           }}
         />
-        <Button
-          color="primary"
+        <img
+          src="/icons/bolt-circle.svg"
+          alt="Send"
           onClick={() => {
             void handleSubmit();
           }}
-        >
-          &nbsp;&gt;&nbsp;
-        </Button>
+        />
       </div>
     </div>
   );
