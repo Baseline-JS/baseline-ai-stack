@@ -25,24 +25,36 @@
       margin-bottom: 24px;
     }
 
-    // --amplify-components-button-color: red;
-    // --amplify-components-button-background-color: red;
-    // --amplify-components-button-border-color: red;
+    --amplify-internal-button-background-color: #fd7e14;
+    --amplify-colors-primary-80: #fd7e14;
+    --amplify-internal-button-background-color: #fd7e14;
+    --amplify-components-button-primary-background-color: #fd7e14;
+    --amplify-components-authenticator-router-border-color: #fd7e14;
+    --amplify-colors-border-focus: #fd7e14;
+    --amplify-components-tabs-item-active-color: #fd7e14;
+    --amplify-components-tabs-item-active-border-color: #fd7e14;
+    --amplify-components-button-primary-hover-background-color: #fbbc05;
+    --amplify-components-button-primary-active-background-color: #fbbc05;
+    --amplify-components-button-primary-focus-background-color: #fbbc05;
+    --amplify-components-tabs-border-style: none;
 
-    --amplify-internal-button-background-color: red;
-    --amplify-colors-primary-80: red;
-    --amplify-internal-button-background-color: red;
-    --amplify-components-button-primary-background-color: orange;
-    --amplify-components-authenticator-router-border-color: orange;
-    --amplify-colors-border-focus: orange;
-    --amplify-components-tabs-item-active-color: orange;
-    --amplify-components-tabs-item-active-border-color: orange;
+    [data-amplify-router=''] {
+      border-radius: 15px;
+    }
+
+    [role='tab'] {
+      border: 0;
+      border-style: none;
+    }
+
+    .tab {
+      border-radius: 15%;
+    }
 
     .amplify-button {
-      background-color: orange;
-      color: orange;
-      border-color: orange;
-      
+      background-color: #fd7e14;
+      color: #fd7e14;
+      border-color: #fd7e14;
     }
   }
 }

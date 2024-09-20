@@ -4,18 +4,27 @@
   height: 100vh;
   max-height: 90vh;
   width: 100%;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 
   h1 {
     margin-bottom: 5px;
   }
 
   .input {
+    position: absolute;
+    bottom: 0;
+    max-width: 900px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px;
     background: #fff;
-    border: 1px solid #bababa;
     border-radius: 10px;
     margin: 5px;
     margin-left: 0;
@@ -27,7 +36,7 @@
       background: #fff;
       border-radius: 10px;
       margin-right: 5px;
-      border-color: #fff;
+      border-color: #bababa;
     }
 
     button {
@@ -42,26 +51,27 @@
   .conversation {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 5px;
     background: #fff;
-    border: 1px solid #bababa;
-    border-radius: 10px;
     height: 100%;
+    width: 100%;
     overflow: auto;
 
     .message {
+      max-width: 900px;
+      width: 100%;
       display: flex;
       flex-direction: row;
       align-items: right;
       justify-content: right;
-      text-align: right;
+      text-align: left;
       padding: 10px;
-
-      width: auto;
       background: #fff;
 
       .text {
         @include global.smallFont();
+        text-align: left;
         border-radius: 10px;
         margin: 15px;
         padding: 10px;
@@ -80,7 +90,6 @@
       text-align: left;
       padding: 15px;
       background: #fff;
-      border: 1px solid #bababa;
       border-radius: 10px;
       margin: 5px;
       width: 90%;
@@ -94,10 +103,12 @@
         width: fit-content;
 
         code {
-          padding: 5px;
-          border-radius: 5px;
-          margin: 5px;
+          overflow-y: auto;
           background: #f0f0f0;
+          border-radius: 5px;
+          padding: 5px;
+          padding-left: 0;
+          padding-right: 0;
         }
 
         table {
@@ -114,6 +125,43 @@
             padding: 5px;
           }
         }
+      }
+    }
+
+    .loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      background: #fff;
+
+      div {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+        border-radius: 50%;
+        background: #ffe7c2;
+        animation: bounce 0.5s infinite alternate ease-in-out;
+
+        @keyframes bounce {
+          to {
+            transform: translateY(-20px);
+          }
+
+          from {
+            transform: translateY(0);
+          }
+        }
+      }
+
+      div:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      div:nth-child(2) {
+        animation-delay: 0.2s;
       }
     }
   }

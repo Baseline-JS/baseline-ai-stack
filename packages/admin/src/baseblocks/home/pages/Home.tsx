@@ -7,7 +7,9 @@ function Home() {
     <div className={styles.home}>
       <div className={styles.content}>
         <img src="/logo.svg" alt="Baseline" />
-        <Link to="/chat">Login</Link>
+        <Link to="/chat" className={styles.startButton}>
+          GET STARTED
+        </Link>
       </div>
     </div>
   );

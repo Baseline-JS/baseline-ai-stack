@@ -11,13 +11,17 @@
     flex: 1 1 auto;
     min-width: min(100vw, 390px);
   }
-  
+
   .content {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
     justify-content: center;
     align-items: center;
+
+    .startButton {
+      @include global.genericButton();
+    }
 
     img {
       width: 100%;

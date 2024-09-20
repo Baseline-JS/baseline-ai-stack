@@ -70,31 +70,39 @@ const ChatContent = (): JSX.Element => {
           >
             <div className={styles.text}>
               {message.sender === 'AI' ? (
-                <Markdown
-                  remarkPlugins={[remarkGfm, remarkBreaks]}
-                  components={{
-                    code(props) {
-                      // eslint-disable-next-line react/prop-types, @typescript-eslint/no-unused-vars
-                      const { children, className, node, ...rest } = props;
-                      const match = /language-(\w+)/.exec(className || '');
-                      return match ? (
-                        <SyntaxHighlighter
-                          {...rest}
-                          PreTag="div"
-                          // eslint-disable-next-line react/no-children-prop
-                          children={String(children)}
-                          language={match[1]}
-                          style={dark}
-                          ref={null}
-                        />
-                      ) : (
-                        <code {...rest}>{children}</code>
-                      );
-                    },
-                  }}
-                >
-                  {message.text}
-                </Markdown>
+                message.text === 'Loading...' ? (
+                  <div className={styles.loader}>
+                    <div />
+                    <div />
+                    <div />
+                  </div>
+                ) : (
+                  <Markdown
+                    remarkPlugins={[remarkGfm, remarkBreaks]}
+                    components={{
+                      code(props) {
+                        // eslint-disable-next-line react/prop-types, @typescript-eslint/no-unused-vars
+                        const { children, className, node, ...rest } = props;
+                        const match = /language-(\w+)/.exec(className || '');
+                        return match ? (
+                          <SyntaxHighlighter
+                            {...rest}
+                            PreTag="div"
+                            // eslint-disable-next-line react/no-children-prop
+                            children={String(children)}
+                            language={match[1]}
+                            style={dark}
+                            ref={null}
+                          />
+                        ) : (
+                          <code {...rest}>{children}</code>
+                        );
+                      },
+                    }}
+                  >
+                    {message.text}
+                  </Markdown>
+                )
               ) : (
                 message.text
               )}
@@ -108,6 +116,8 @@ const ChatContent = (): JSX.Element => {
           type="text"
           label="prompt"
           value={prompt}
+          placeholder="Type a message..."
+          autoFocus
           onChange={(e) => setPrompt(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
