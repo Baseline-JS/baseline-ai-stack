@@ -88,9 +88,7 @@ const ChatContent = (): JSX.Element => {
                           ref={null}
                         />
                       ) : (
-                        <code {...rest} className={className}>
-                          {children}
-                        </code>
+                        <code {...rest}>{children}</code>
                       );
                     },
                   }}

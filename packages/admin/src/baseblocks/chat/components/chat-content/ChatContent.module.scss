@@ -92,6 +92,28 @@
         padding-right: 20px;
         background: #fff;
         width: fit-content;
+
+        code {
+          padding: 5px;
+          border-radius: 5px;
+          margin: 5px;
+          background: #f0f0f0;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+
+          th {
+            border: 1px solid #bababa;
+            padding: 5px;
+          }
+
+          td {
+            border: 1px solid #bababa;
+            padding: 5px;
+          }
+        }
       }
     }
   }
