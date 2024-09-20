@@ -1,4 +1,4 @@
-service: ${env:APP_NAME}-admin
+service: ${env:APP_NAME}-chat
 
 frameworkVersion: '>=2.0.0 <4.0.0'
 
@@ -15,9 +15,9 @@ custom:
       items:
         - '/*'
   # domain:
-  #   local: "local-admin.baselinejs.com"
-  #   staging: "staging-admin.baselinejs.com"
-  #   prod: "admin.baselinejs.com"
+  #   local: "local-ai.baselinejs.com"
+  #   staging: "staging-ai.baselinejs.com"
+  #   prod: "ai.baselinejs.com"
 
 provider:
   name: aws
@@ -159,11 +159,11 @@ resources:
 
   ## In order to print out the hosted domain via `serverless info` we need to define the DomainName output for CloudFormation
   Outputs:
-    AdminCloudFrontUrl:
-      Description: The Admin URL
+    ChatCloudFrontUrl:
+      Description: The Chat URL
       Value:
         'Fn::GetAtt': [WebsiteCloudFrontDistribution, DomainName]
-    AdminCloudFrontDistributionId:
+    ChatCloudFrontDistributionId:
       Description: CloudFront Distribution Id
       Value:
         Ref: WebsiteCloudFrontDistribution

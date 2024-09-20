@@ -1,6 +1,6 @@
 ![1688515420018](https://github.com/Baseline-JS/core/assets/151841910/620fa869-4bca-418d-af2c-3a3f8b2d2719)
 
-# BaselineJS
+# Baseline AI Stack
 
 BaselineJS is an open-source, fullstack TypeScript, serverless first framework designed to make building cloud native applications easier. Our framework utilizes a combination of modern technologies, architectures and operational processes to help teams to efficiently build and deploy robust applications
 
@@ -31,8 +31,8 @@ Video walkthroughs setting up Baseline
 3. `pnpm install`
 4. `pnpm run setup` to name your project and set the region
 5. `pnpm run aws:profile` to setup your AWS credentials profile (if you have issues please [update aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html]))
-6. `pnpm run deploy:staging` to deploy api/web/admin
-7. `pnpm run add:user:staging` to add an admin user to the application
+6. `pnpm run deploy:staging` to deploy api/web/chat
+7. `pnpm run add:user:staging` to add a chat user to the application
 8. `pnpm run urls:staging` To see your project URLs
 
 ## Local Requirements
@@ -88,24 +88,24 @@ If the project is already setup and you are trying run the project locally make 
 
 ### Commands
 
-Start the api, admin and web in their own terminal windows/tabs with the following commands.
+Start the api, chat and web in their own terminal windows/tabs with the following commands.
 
 1. `pnpm run generate:env:local` to generate the env files for the frontend clients
 2. `pnpm run start:api`
-3. `pnpm run start:admin`
+3. `pnpm run start:chat`
 4. `pnpm run start:web`
 
 ### Running locally Limitations
 
-- API, Web & Admin: No S3, you will need to rely on AWS staging S3
+- API, Web & Chat: No S3, you will need to rely on AWS staging S3
 - API: No local Cognito Authorizer, the deployed staging cognito can be used (see `packages/api/serverless.yml`) or the payload set by `AUTHORIZER` in `packages/api/scripts/run-api-local.sh`.
-- Admin: Cognito UI relies on an active AWS Cognito user pool, use deployed staging
+- Chat: Cognito UI relies on an active AWS Cognito user pool, use deployed staging
 
 ## Deploy a Change
 
 Swap `staging` to `prod` to deploy to production. All environment variables will be automatically set in the process.
 
-1. `pnpm run deploy:staging` to deploy api/web/admin
+1. `pnpm run deploy:staging` to deploy api/web/chat
 
 ## Remove Stack
 
@@ -114,8 +114,7 @@ To destroy the deployed cloudformation stacks so it is no longer on AWS run `pnp
 ## Major Components
 
 - 🚀 API
-- 🖥️ React Admin Website
-- 🌐 React User Website
+- 🌐 React User Application
 - ⚙️ CI/CD
 - 🔧 Developer Tooling
 - 🔒 Authentication

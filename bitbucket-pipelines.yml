@@ -17,7 +17,7 @@ pipelines:
             - root-node
             - api-node
             - web-node
-            - admin-node
+            - chat-node
             - client-api-node
       - parallel:
           - step:
@@ -34,23 +34,23 @@ pipelines:
                 - root-node
                 - api-node
                 - web-node
-                - admin-node
+                - chat-node
                 - client-api-node
           - step:
               oidc: true
-              name: Deploy Admin
+              name: Deploy Chat
               size: 2x
               script:
                 - touch ~/.bash_profile
                 - . ./scripts/setup-npm.sh
                 - . ./scripts/setup-aws.sh
                 - pnpm install
-                - ./scripts/deploy.sh ./packages/admin
+                - ./scripts/deploy.sh ./packages/chat
               caches:
                 - root-node
                 - api-node
                 - web-node
-                - admin-node
+                - chat-node
                 - client-api-node
   default:
     - parallel:
@@ -66,7 +66,7 @@ pipelines:
               - root-node
               - api-node
               - web-node
-              - admin-node
+              - chat-node
               - client-api-node
         - step:
             oidc: true
@@ -83,7 +83,7 @@ pipelines:
               - root-node
               - api-node
               - web-node
-              - admin-node
+              - chat-node
               - client-api-node
         - step:
             oidc: true
@@ -100,29 +100,29 @@ pipelines:
               - root-node
               - api-node
               - web-node
-              - admin-node
+              - chat-node
               - client-api-node
         - step:
             oidc: true
-            name: Build Admin
+            name: Build Chat
             size: 2x
             script:
               - touch ~/.bash_profile
               - . ./scripts/setup-npm.sh
               - . ./scripts/setup-aws.sh
               - pnpm install
-              - cd ./packages/admin
+              - cd ./packages/chat
               - pnpm run build
             caches:
               - root-node
               - api-node
               - web-node
-              - admin-node
+              - chat-node
               - client-api-node
 definitions:
   caches:
     root-node: ./node_modules
     api-node: ./packages/api/node_modules
     web-node: ./packages/web/node_modules
-    admin-node: ./packages/admin/node_modules
+    chat-node: ./packages/chat/node_modules
     client-api-node: ./shared/client-api/node_modules

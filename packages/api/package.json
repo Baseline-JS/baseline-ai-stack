@@ -24,9 +24,10 @@
     "pretty": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}' && npx prettier --write '*.{yml,yaml,js}'"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "3.651.1",
     "@aws-sdk/client-cognito-identity-provider": "3.530.0",
-    "@baselinejs/dynamodb": "0.2.4",
     "@baseline/types": "workspace:1.0.0",
+    "@baselinejs/dynamodb": "0.2.4",
     "aws-lambda": "1.0.7",
     "compression": "1.7.4",
     "cors": "2.8.5",

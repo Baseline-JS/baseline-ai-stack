@@ -7,7 +7,7 @@ module.exports = {
       './tsconfig.json',
       './packages/web/tsconfig.json',
       './packages/api/tsconfig.json',
-      './packages/admin/tsconfig.json',
+      './packages/chat/tsconfig.json',
     ],
   },
   plugins: ['@typescript-eslint'],

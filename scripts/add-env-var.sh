@@ -115,13 +115,13 @@ else
     rm packages/web/vite.config.ts.bak
   fi
 
-  if grep -q "      'REACT_APP_$NAME" "packages/admin/vite.config.ts"; then
-    echo "Variable is already in packages/admin/vite.config.ts, will not duplicate"
+  if grep -q "      'REACT_APP_$NAME" "packages/chat/vite.config.ts"; then
+    echo "Variable is already in packages/chat/vite.config.ts, will not duplicate"
   else
-    echo "Updating packages/admin/vite.config.ts..."
+    echo "Updating packages/chat/vite.config.ts..."
     NEW_VAR_TYPE="      'REACT_APP_$NAME'"
-    sed -i.bak "s/.*    EnvironmentPlugin(\[.*/&\n${NEW_VAR_TYPE},/g" packages/admin/vite.config.ts
-    rm packages/admin/vite.config.ts.bak
+    sed -i.bak "s/.*    EnvironmentPlugin(\[.*/&\n${NEW_VAR_TYPE},/g" packages/chat/vite.config.ts
+    rm packages/chat/vite.config.ts.bak
   fi
 
   echo "Generating fresh env vars file..."

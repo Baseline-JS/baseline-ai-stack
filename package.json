@@ -1,6 +1,6 @@
 {
-  "name": "@baselinejs/core",
-  "version": "0.0.11",
+  "name": "@baselinejs/ai-stack",
+  "version": "0.0.1",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
@@ -36,12 +36,12 @@
     "add:object": "pnpm --filter @baseline/add-object start",
     "add:user:staging": "pnpm --filter @baseline/api run add:user:staging",
     "add:user:prod": "pnpm --filter @baseline/api run add:user:prod",
-    "deploy:staging": "pnpm --filter @baseline/api run deploy:staging && pnpm --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run deploy:staging",
-    "remove:staging": "pnpm --filter @baseline/api --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run remove:staging",
-    "deploy:prod": "pnpm --filter @baseline/api run deploy:prod && pnpm --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run deploy:prod",
-    "remove:prod": "pnpm --filter @baseline/api --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run remove:prod",
+    "deploy:staging": "pnpm --filter @baseline/api run deploy:staging && pnpm --filter @baseline/chat --filter @baseline/web --if-present --recursive --parallel run deploy:staging",
+    "remove:staging": "pnpm --filter @baseline/api --filter @baseline/chat --filter @baseline/web --if-present --recursive --parallel run remove:staging",
+    "deploy:prod": "pnpm --filter @baseline/api run deploy:prod && pnpm --filter @baseline/chat --filter @baseline/web --if-present --recursive --parallel run deploy:prod",
+    "remove:prod": "pnpm --filter @baseline/api --filter @baseline/chat --filter @baseline/web --if-present --recursive --parallel run remove:prod",
     "start:api": "pnpm --filter @baseline/api run start",
-    "start:admin": "pnpm --filter @baseline/admin run start",
+    "start:chat": "pnpm --filter @baseline/chat run start",
     "start:web": "pnpm --filter @baseline/web run start",
     "install:requirements": "./scripts/experimental-install-requirements.sh"
   },

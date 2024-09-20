@@ -6,9 +6,8 @@ function Home() {
   return (
     <div className={styles.home}>
       <div className={styles.content}>
-        <h1>Home</h1>
-        <p>Welcome to the home page</p>
-        <Link to="/dashboard">Dashboard</Link>
+        <img src="/logo.svg" alt="Baseline" />
+        <Link to="/chat">Login</Link>
       </div>
     </div>
   );

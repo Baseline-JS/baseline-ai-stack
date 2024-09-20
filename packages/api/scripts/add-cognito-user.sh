@@ -14,8 +14,6 @@ STAGE=$1
 # Sets REGION, APP_NAME, AWS_REGION, AWS_PROFILE
 . ../../scripts/project-variables.sh
 
-TABLE="${APP_NAME}-${STAGE}-admin"
-
 echo "Getting Cognito User Pool Id from [$STAGE]..."
 . ../../scripts/get-stack-outputs.sh "$STAGE" >/dev/null
 COGNITO_USER_POOL_ID="${UserPoolId:-}"
@@ -52,7 +50,7 @@ if [ "$USER_PASSWORD" == "" ]; then
   exit 1
 fi
 
-EXISTING_USER=$(aws cognito-idp admin-get-user \
+EXISTING_USER=$(aws cognito-idp chat-get-user \
   --profile "${AWS_PROFILE}" \
   --region "${REGION}" \
   --user-pool-id "${COGNITO_USER_POOL_ID:-}" \
@@ -64,7 +62,7 @@ if [ "$EXISTING_USER" ]; then
 else
   echo "Creating User..."
 
-  aws cognito-idp admin-create-user \
+  aws cognito-idp chat-create-user \
     --profile "${AWS_PROFILE}" \
     --region "${REGION}" \
     --user-pool-id "${COGNITO_USER_POOL_ID:-}" \
@@ -73,7 +71,7 @@ else
     --message-action SUPPRESS >/dev/null
 
   echo "Setting Password..."
-  aws cognito-idp admin-set-user-password \
+  aws cognito-idp chat-set-user-password \
     --profile "${AWS_PROFILE}" \
     --region "${REGION}" \
     --user-pool-id "${COGNITO_USER_POOL_ID:-}" \
@@ -82,7 +80,7 @@ else
     --permanent >/dev/null
 fi
 
-USER_SUB=$(aws cognito-idp admin-get-user \
+USER_SUB=$(aws cognito-idp chat-get-user \
   --profile "${AWS_PROFILE}" \
   --region "${REGION}" \
   --user-pool-id "${COGNITO_USER_POOL_ID:-}" \
@@ -93,15 +91,9 @@ USER_SUB=$(aws cognito-idp admin-get-user \
 echo "User Sub: [${USER_SUB}]"
 
 if [ "$USER_SUB" ]; then
-  echo "Found user sub, attempting to create DynamoDB record"
-  aws dynamodb put-item \
-    --table-name "${TABLE}" \
-    --item \
-    "{\"userSub\": {\"S\": \"${USER_SUB}\"}, \"userEmail\": {\"S\": \"${USER_EMAIL}\"}}" \
-    --profile "${AWS_PROFILE}" \
-    --region "${REGION}"
+  echo "User created successfully!"
 else
-  echo "User sub not found, cannot create DynamoDB record"
+  echo "User sub not found, something went wrong!"
 fi
 
 echo "Done!"

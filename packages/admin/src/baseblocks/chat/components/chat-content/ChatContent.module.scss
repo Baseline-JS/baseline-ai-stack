@@ -1,0 +1,98 @@
+@use '../../../../styles/global';
+
+.chat {
+  height: 100vh;
+  max-height: 90vh;
+  width: 100%;
+
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  .input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #bababa;
+    border-radius: 10px;
+    margin: 5px;
+    margin-left: 0;
+
+    input {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 5px;
+      background: #fff;
+      border-radius: 10px;
+      margin-right: 5px;
+      border-color: #fff;
+    }
+
+    button {
+      @include global.mediumFont();
+      padding: 5px;
+      background: #000;
+      color: #fff;
+      border-radius: 10px;
+    }
+  }
+
+  .conversation {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #bababa;
+    border-radius: 10px;
+    height: 100%;
+    overflow: auto;
+
+    .message {
+      display: flex;
+      flex-direction: row;
+      align-items: right;
+      justify-content: right;
+      text-align: right;
+      padding: 10px;
+
+      width: auto;
+      background: #fff;
+
+      .text {
+        @include global.smallFont();
+        border-radius: 10px;
+        margin: 15px;
+        padding: 10px;
+        padding-right: 20px;
+        padding-left: 20px;
+        background: #ffe7c2;
+        width: fit-content;
+      }
+    }
+
+    .ai {
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      justify-content: left;
+      text-align: left;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #bababa;
+      border-radius: 10px;
+      margin: 5px;
+      width: 90%;
+
+      .text {
+        @include global.smallFont();
+        border-radius: 10px;
+        margin: 5px;
+        padding-right: 20px;
+        background: #fff;
+        width: fit-content;
+      }
+    }
+  }
+}

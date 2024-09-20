@@ -42,8 +42,8 @@ custom:
     seed:
       local:
         sources:
-          - table: ${env:APP_NAME}-${opt:stage}-admin
-            sources: [./src/baseblocks/admin/admin.seed.json]
+          - table: ${env:APP_NAME}-${opt:stage}-chat
+            sources: [./src/baseblocks/chat/chat.seed.json]
 
 package:
   individually: true
@@ -84,6 +84,11 @@ provider:
       statements:
         - Effect: Allow
           Action:
+            - bedrock:InvokeModel
+            - bedrock:InvokeModelAsync
+          Resource: '*'
+        - Effect: Allow
+          Action:
             - dynamodb:Query
             - dynamodb:Scan
             - dynamodb:GetItem
@@ -92,19 +97,12 @@ provider:
             - dynamodb:DeleteItem
             - dynamodb:BatchGetItem
           Resource:
-            - !Sub ${adminTable.Arn}
-            - !Sub ${adminTable.Arn}/index/*
-        - Effect: Allow
-          Action:
-            - cognito-idp:AdminCreateUser
-            - cognito-idp:AdminGetUser
-            - cognito-idp:ListUsers
-          Resource:
-            - !Sub ${CognitoUserPool.Arn}
+            - !Sub ${chatTable.Arn}
+            - !Sub ${chatTable.Arn}/index/*
 
 resources:
   - ${file(./src/baseblocks/cognito/cognito-resources.yml)}
-  - ${file(./src/baseblocks/admin/admin-dynamodb.yml)}
+  - ${file(./src/baseblocks/chat/chat-dynamodb.yml)}
 
 functions:
-  - ${file(./src/baseblocks/admin/admin-functions.yml)}
+  - ${file(./src/baseblocks/chat/chat-functions.yml)}

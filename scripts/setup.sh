@@ -20,8 +20,8 @@ if ! command -v aws &>/dev/null; then
 fi
 printf "Enter the name of your new application (e.g. my-new-app): "
 read -r PROJECT_NAME
-sed -i '' -e "s|baseline-core|$PROJECT_NAME|g" ./scripts/project-variables.sh >/dev/null 2>&1
-sed -i '' -e "s|baseline-core|$PROJECT_NAME|g" ./scripts/setup.sh >/dev/null 2>&1
+sed -i '' -e "s|baseline-ai-stack|$PROJECT_NAME|g" ./scripts/project-variables.sh >/dev/null 2>&1
+sed -i '' -e "s|baseline-ai-stack|$PROJECT_NAME|g" ./scripts/setup.sh >/dev/null 2>&1
 echo
 echo "Awesome, lets set a region where the app will be hosted!"
 echo
@@ -77,15 +77,15 @@ echo "Great, lets get started!"
 echo "------------------------"
 echo "To finish setting up your application you will need to run the following commands:"
 echo "- [pnpm run aws:profile] to setup your AWS credentials profile"
-echo "- [pnpm run deploy:staging] to deploy api/web/admin"
-echo "- [pnpm run add:user:staging] to add an admin user to the application"
+echo "- [pnpm run deploy:staging] to deploy api/web/chat"
+echo "- [pnpm run add:user:staging] to add an chat user to the application"
 echo "- [pnpm run urls:staging] To see your project URLs"
 echo
 echo "After that you will be able to run it locally! 🎉"
 echo "-----------------------------------------------"
-echo "1. [pnpm run generate:env:local]" to generate env files for admin and web
+echo "1. [pnpm run generate:env:local]" to generate env files for chat and web
 echo "2. [pnpm run start:api]"
-echo "3. [pnpm run start:admin]"
+echo "3. [pnpm run start:chat]"
 echo "4. [pnpm run start:web]"
 echo
 echo "If you have any questions or need help, please reach out to us at https://baselinejs.com"

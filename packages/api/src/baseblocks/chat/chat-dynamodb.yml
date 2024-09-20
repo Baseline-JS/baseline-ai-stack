@@ -1,10 +1,10 @@
 Resources:
-  adminTable:
+  chatTable:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: ${self:custom.deletionPolicy.${opt:stage}}
     UpdateReplacePolicy: ${self:custom.updatePolicy.${opt:stage}}
     Properties:
-      TableName: ${env:APP_NAME}-${opt:stage}-admin
+      TableName: ${env:APP_NAME}-${opt:stage}-chat
       AttributeDefinitions:
         - AttributeName: userSub
           AttributeType: S

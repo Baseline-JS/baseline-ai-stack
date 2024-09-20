@@ -12,7 +12,7 @@ echo "Stage [$1]"
 . ./scripts/get-stack-outputs.sh $1 >/dev/null
 
 echo "Web: https://${WebCloudFrontUrl:-}"
-echo "Admin: https://${AdminCloudFrontUrl:-}"
+echo "Chat: https://${ChatCloudFrontUrl:-}"
 echo "API: ${ServiceEndpoint:-}"
 
 cd "$CURRENT_DIR" || exit

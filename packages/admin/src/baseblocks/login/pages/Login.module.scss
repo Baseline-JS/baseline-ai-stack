@@ -11,12 +11,38 @@
     flex: 1 1 auto;
     min-width: min(100vw, 390px);
   }
-  
+
   .content {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
     justify-content: center;
     align-items: center;
+
+    .logo {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 24px;
+    }
+
+    // --amplify-components-button-color: red;
+    // --amplify-components-button-background-color: red;
+    // --amplify-components-button-border-color: red;
+
+    --amplify-internal-button-background-color: red;
+    --amplify-colors-primary-80: red;
+    --amplify-internal-button-background-color: red;
+    --amplify-components-button-primary-background-color: orange;
+    --amplify-components-authenticator-router-border-color: orange;
+    --amplify-colors-border-focus: orange;
+    --amplify-components-tabs-item-active-color: orange;
+    --amplify-components-tabs-item-active-border-color: orange;
+
+    .amplify-button {
+      background-color: orange;
+      color: orange;
+      border-color: orange;
+      
+    }
   }
 }

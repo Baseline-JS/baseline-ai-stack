@@ -20,17 +20,18 @@ const Sidebar = (): JSX.Element => {
           setIsToggled((toggled) => !toggled);
         }}
       ></div>
-      <img src="/logo.png" alt="Baseline" />
+      <img src="/logo.svg" alt="Baseline" />
+      <div className={styles.spacer} />
 
       <div className={styles.links}>
         <Link
-          to="/dashboard"
+          to="/chat"
           className={`${styles.link} ${
-            location.pathname === '/dashboard' ? styles.active : ''
+            location.pathname === '/chat' ? styles.active : ''
           }`}
         >
           <img src="/icons/home.svg" alt="Home" />
-          <span>Dashboard</span>
+          <span>Chat</span>
         </Link>
 
         <div className={styles.spacer} />
@@ -38,13 +39,13 @@ const Sidebar = (): JSX.Element => {
         <div className={styles.spacer} />
 
         <Link
-          to="/admins"
+          to="/subscription"
           className={`${styles.link} ${
-            location.pathname === '/admins' ? styles.active : ''
+            location.pathname === '/subscription' ? styles.active : ''
           }`}
         >
-          <img src="/icons/users.svg" alt="Admins" />
-          <span>Admins</span>
+          <img src="/icons/users.svg" alt="Subscription" />
+          <span>Subscription</span>
         </Link>
 
         <Link

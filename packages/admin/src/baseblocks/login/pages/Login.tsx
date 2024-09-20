@@ -6,6 +6,7 @@ function Login() {
   return (
     <div className={styles.login}>
       <div className={styles.content}>
+        <img src="/logo.svg" alt="Baseline" className={styles.logo} />
         <Authenticator />
       </div>
     </div>

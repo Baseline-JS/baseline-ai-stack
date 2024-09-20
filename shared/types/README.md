@@ -27,7 +27,7 @@ Add a new dependency to the client `package.json` (e.g. `packages/web/package.js
 Referencing the type in code
 
 ```
-import { Admin } from '@baseline/types/admin';
+import { Chat } from '@baseline/types/chat';
 ```
 
 If you are having issues with your IDE showing this package as not existing attempt restarting your IDE TS Server and IDE ESLint Server.
