@@ -1,7 +1,7 @@
 import { Chat } from '@baseline/types/chat';
 import { RequestHandler } from './request-handler';
 
-interface ChatPromptResponse {
+export interface ChatPromptResponse {
   output: {
     message: {
       content: [

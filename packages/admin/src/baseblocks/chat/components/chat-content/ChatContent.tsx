@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './ChatContent.module.scss';
-import { Button, Input } from 'reactstrap';
-import { chatPrompt } from '@baseline/client-api/chat';
+import { Input } from 'reactstrap';
+import { chatPrompt, ChatPromptResponse } from '@baseline/client-api/chat';
 import { getRequestHandler } from '@baseline/client-api/request-handler';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -19,32 +19,40 @@ const ChatContent = (): JSX.Element => {
   const [messages, setMessages] = useState<Message[]>([]);
 
   const handleSubmit = async () => {
+    if (prompt.length === 0) return;
     setMessages([
       ...messages,
-      {
-        sender: 'User',
-        text: prompt,
-      },
-      {
-        sender: 'AI',
-        text: 'Loading...',
-      },
+      { sender: 'User', text: prompt },
+      { sender: 'AI', text: 'Loading...' },
     ]);
     setPrompt('');
-    const response = await chatPrompt(getRequestHandler(), { text: prompt });
+    let response: ChatPromptResponse;
+    try {
+      response = await chatPrompt(getRequestHandler(), { text: prompt });
+    } catch (error) {
+      console.error(error);
+      let errorMessage = '**An error occurred. Please try again.**';
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      if (error?.response?.data?.error) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        errorMessage = error.response.data.error as string;
+        if (errorMessage === 'Failed to get response') {
+          errorMessage = '**Something went wrong. Please try again.**';
+        }
+      }
+      setMessages([
+        ...messages,
+        { sender: 'User', text: prompt },
+        { sender: 'AI', text: errorMessage },
+      ]);
+      return;
+    }
+    const responseText = response.output.message.content[0].text;
     setMessages([
       ...messages,
-      {
-        sender: 'User',
-        text: prompt,
-      },
-      {
-        sender: 'AI',
-        text: response.output.message.content[0].text,
-      },
+      { sender: 'User', text: prompt },
+      { sender: 'AI', text: responseText },
     ]);
-
-    console.log(JSON.stringify(response.output.message.content[0].text));
   };
 
   const containerRef = useRef(null);
