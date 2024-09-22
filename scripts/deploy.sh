@@ -9,7 +9,7 @@ PARENT_PATH="$(
 )/.."
 cd "$PARENT_PATH" || exit
 
-# Move to the component to deploy (api or web)
+# Move to the component to deploy (api or chat)
 PACKAGE_PATH="${1:-""}"
 cd "$PACKAGE_PATH"
 

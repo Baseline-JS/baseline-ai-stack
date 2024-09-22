@@ -11,7 +11,6 @@
     "url": "https://github.com/Baseline-JS/core.git"
   },
   "author": "Baseline JS",
-  "description": "Baseline JS is a serverless first full-stack JavaScript framework for building modern web applications.",
   "license": "MIT",
   "workspaces": [
     "packages/*",
@@ -36,13 +35,8 @@
     "add:object": "pnpm --filter @baseline/add-object start",
     "add:user:staging": "pnpm --filter @baseline/api run add:user:staging",
     "add:user:prod": "pnpm --filter @baseline/api run add:user:prod",
-    "deploy:staging": "pnpm --filter @baseline/api run deploy:staging && pnpm --filter @baseline/chat --filter @baseline/web --if-present --recursive --parallel run deploy:staging",
-    "remove:staging": "pnpm --filter @baseline/api --filter @baseline/chat --filter @baseline/web --if-present --recursive --parallel run remove:staging",
-    "deploy:prod": "pnpm --filter @baseline/api run deploy:prod && pnpm --filter @baseline/chat --filter @baseline/web --if-present --recursive --parallel run deploy:prod",
-    "remove:prod": "pnpm --filter @baseline/api --filter @baseline/chat --filter @baseline/web --if-present --recursive --parallel run remove:prod",
     "start:api": "pnpm --filter @baseline/api run start",
     "start:chat": "pnpm --filter @baseline/chat run start",
-    "start:web": "pnpm --filter @baseline/web run start",
     "install:requirements": "./scripts/experimental-install-requirements.sh"
   },
   "devDependencies": {

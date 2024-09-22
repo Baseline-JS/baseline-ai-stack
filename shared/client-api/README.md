@@ -12,13 +12,13 @@ New api endpoints may be manually added to this folder. A Baseblock may also add
 
 ## Using Client API in a Client
 
-Add a new "include" to the client `tsconfig.json` (e.g. `packages/web/tsconfig.json`)
+Add a new "include" to the client `tsconfig.json` (e.g. `packages/chat/tsconfig.json`)
 
 ```
 "include": ["../shared/client-api"]
 ```
 
-Add a new dependency to the client `package.json` (e.g. `packages/web/package.json`)
+Add a new dependency to the client `package.json` (e.g. `packages/chat/package.json`)
 
 ```
 "@baseline/client-api": "1.0.0",

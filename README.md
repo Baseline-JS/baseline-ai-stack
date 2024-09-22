@@ -31,7 +31,7 @@ Video walkthroughs setting up Baseline
 3. `pnpm install`
 4. `pnpm run setup` to name your project and set the region
 5. `pnpm run aws:profile` to setup your AWS credentials profile (if you have issues please [update aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html]))
-6. `pnpm run deploy:staging` to deploy api/web/chat
+6. `pnpm run deploy:staging` to deploy api/chat
 7. `pnpm run add:user:staging` to add a chat user to the application
 8. `pnpm run urls:staging` To see your project URLs
 
@@ -88,16 +88,15 @@ If the project is already setup and you are trying run the project locally make 
 
 ### Commands
 
-Start the api, chat and web in their own terminal windows/tabs with the following commands.
+Start the api and chat in their own terminal windows/tabs with the following commands.
 
 1. `pnpm run generate:env:local` to generate the env files for the frontend clients
 2. `pnpm run start:api`
 3. `pnpm run start:chat`
-4. `pnpm run start:web`
 
 ### Running locally Limitations
 
-- API, Web & Chat: No S3, you will need to rely on AWS staging S3
+- API, Chat: No S3, you will need to rely on AWS staging S3
 - API: No local Cognito Authorizer, the deployed staging cognito can be used (see `packages/api/serverless.yml`) or the payload set by `AUTHORIZER` in `packages/api/scripts/run-api-local.sh`.
 - Chat: Cognito UI relies on an active AWS Cognito user pool, use deployed staging
 
@@ -105,7 +104,7 @@ Start the api, chat and web in their own terminal windows/tabs with the followin
 
 Swap `staging` to `prod` to deploy to production. All environment variables will be automatically set in the process.
 
-1. `pnpm run deploy:staging` to deploy api/web/chat
+1. `pnpm run deploy:staging` to deploy api and chat
 
 ## Remove Stack
 

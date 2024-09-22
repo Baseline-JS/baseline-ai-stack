@@ -77,16 +77,15 @@ echo "Great, lets get started!"
 echo "------------------------"
 echo "To finish setting up your application you will need to run the following commands:"
 echo "- [pnpm run aws:profile] to setup your AWS credentials profile"
-echo "- [pnpm run deploy:staging] to deploy api/web/chat"
+echo "- [pnpm run deploy:staging] to deploy api and chat"
 echo "- [pnpm run add:user:staging] to add an chat user to the application"
 echo "- [pnpm run urls:staging] To see your project URLs"
 echo
 echo "After that you will be able to run it locally! 🎉"
 echo "-----------------------------------------------"
-echo "1. [pnpm run generate:env:local]" to generate env files for chat and web
+echo "1. [pnpm run generate:env:local]" to generate env files for chat and chat
 echo "2. [pnpm run start:api]"
 echo "3. [pnpm run start:chat]"
-echo "4. [pnpm run start:web]"
 echo
 echo "If you have any questions or need help, please reach out to us at https://baselinejs.com"
 echo

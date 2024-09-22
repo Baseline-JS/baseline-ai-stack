@@ -16,42 +16,23 @@ pipelines:
           caches:
             - root-node
             - api-node
-            - web-node
             - chat-node
             - client-api-node
-      - parallel:
-          - step:
-              oidc: true
-              name: Deploy Web
-              size: 2x
-              script:
-                - touch ~/.bash_profile
-                - . ./scripts/setup-npm.sh
-                - . ./scripts/setup-aws.sh
-                - pnpm install
-                - ./scripts/deploy.sh ./packages/web
-              caches:
-                - root-node
-                - api-node
-                - web-node
-                - chat-node
-                - client-api-node
-          - step:
-              oidc: true
-              name: Deploy Chat
-              size: 2x
-              script:
-                - touch ~/.bash_profile
-                - . ./scripts/setup-npm.sh
-                - . ./scripts/setup-aws.sh
-                - pnpm install
-                - ./scripts/deploy.sh ./packages/chat
-              caches:
-                - root-node
-                - api-node
-                - web-node
-                - chat-node
-                - client-api-node
+      - step:
+          oidc: true
+          name: Deploy Chat
+          size: 2x
+          script:
+            - touch ~/.bash_profile
+            - . ./scripts/setup-npm.sh
+            - . ./scripts/setup-aws.sh
+            - pnpm install
+            - ./scripts/deploy.sh ./packages/chat
+          caches:
+            - root-node
+            - api-node
+            - chat-node
+            - client-api-node
   default:
     - parallel:
         - step:
@@ -65,7 +46,6 @@ pipelines:
             caches:
               - root-node
               - api-node
-              - web-node
               - chat-node
               - client-api-node
         - step:
@@ -82,24 +62,6 @@ pipelines:
             caches:
               - root-node
               - api-node
-              - web-node
-              - chat-node
-              - client-api-node
-        - step:
-            oidc: true
-            name: Build Web
-            size: 2x
-            script:
-              - touch ~/.bash_profile
-              - . ./scripts/setup-npm.sh
-              - . ./scripts/setup-aws.sh
-              - pnpm install
-              - cd ./packages/web
-              - pnpm run build
-            caches:
-              - root-node
-              - api-node
-              - web-node
               - chat-node
               - client-api-node
         - step:
@@ -116,13 +78,11 @@ pipelines:
             caches:
               - root-node
               - api-node
-              - web-node
               - chat-node
               - client-api-node
 definitions:
   caches:
     root-node: ./node_modules
     api-node: ./packages/api/node_modules
-    web-node: ./packages/web/node_modules
     chat-node: ./packages/chat/node_modules
     client-api-node: ./shared/client-api/node_modules
