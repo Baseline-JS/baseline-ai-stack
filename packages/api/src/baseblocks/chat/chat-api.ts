@@ -10,6 +10,7 @@ import {
   Message,
 } from '@aws-sdk/client-bedrock-runtime';
 import { updateUsage, usageService } from '../usage/usage.service';
+import { ModelIdentifiers } from './models';
 
 const app = createApp();
 export const handler = createAuthenticatedHandler(app);
@@ -177,8 +178,9 @@ app.post('/chat/prompt', [
       const runtimeClient = new BedrockRuntimeClient({
         region: 'ap-southeast-2',
       });
+
       const input: ConverseStreamCommandInput = {
-        modelId: 'mistral.mistral-7b-instruct-v0:2', //ModelIdentifiers.MISTRAL_MISTRAL_7B_INSTRUCT_V0,
+        modelId: ModelIdentifiers.MISTRAL_MISTRAL_7B_INSTRUCT_V0,
         messages,
       };
 

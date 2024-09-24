@@ -1,4 +1,4 @@
-const ModelIdentifiers = {
+export const ModelIdentifiers = {
   AI21_JAMBA_INSTRUCT_V1: 'ai21.jamba-instruct-v1:0',
   AI21_J2_MID_V1: 'ai21.j2-mid-v1',
   AI21_J2_ULTRA_V1: 'ai21.j2-ultra-v1',
@@ -41,5 +41,3 @@ const ModelIdentifiers = {
   STABILITY_STABLE_IMAGE_ULTRA_V1: 'stability.stable-image-ultra-v1:0',
   STABILITY_STABLE_IMAGE_CORE_V1: 'stability.stable-image-core-v1:0',
 } as const;
-
-type ModelIdentifier = typeof ModelIdentifiers[keyof typeof ModelIdentifiers];
