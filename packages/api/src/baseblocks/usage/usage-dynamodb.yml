@@ -1,16 +1,16 @@
 Resources:
-  chatTable:
+  usageTable:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: ${self:custom.deletionPolicy.${opt:stage}}
     UpdateReplacePolicy: ${self:custom.updatePolicy.${opt:stage}}
     Properties:
-      TableName: ${env:APP_NAME}-${opt:stage}-chat
+      TableName: ${env:APP_NAME}-${opt:stage}-usage
       AttributeDefinitions:
-        - AttributeName: userSub
+        - AttributeName: usageId
           AttributeType: S
       KeySchema:
-        - AttributeName: userSub
+        - AttributeName: usageId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
-      PointInTimeRecoverySpecification:
+      PointInTimeRecoverySpecification: 
         PointInTimeRecoveryEnabled: true

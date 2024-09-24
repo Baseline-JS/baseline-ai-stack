@@ -42,8 +42,8 @@ custom:
     seed:
       local:
         sources:
-          - table: ${env:APP_NAME}-${opt:stage}-chat
-            sources: [./src/baseblocks/chat/chat.seed.json]
+          - table: ${env:APP_NAME}-${opt:stage}-usage
+            sources: [./src/baseblocks/usage/usage.seed.json]
 
 package:
   individually: true
@@ -97,12 +97,13 @@ provider:
             - dynamodb:DeleteItem
             - dynamodb:BatchGetItem
           Resource:
-            - !Sub ${chatTable.Arn}
-            - !Sub ${chatTable.Arn}/index/*
+            - !Sub ${usageTable.Arn}
+            - !Sub ${usageTable.Arn}/index/*
 
 resources:
   - ${file(./src/baseblocks/cognito/cognito-resources.yml)}
-  - ${file(./src/baseblocks/chat/chat-dynamodb.yml)}
+  - ${file(./src/baseblocks/usage/usage-dynamodb.yml)}
 
 functions:
   - ${file(./src/baseblocks/chat/chat-functions.yml)}
+  - ${file(./src/baseblocks/usage/usage-functions.yml)}
