@@ -18,8 +18,11 @@ if ! command -v aws &>/dev/null; then
     echo "You can find instructions here: https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html"
     exit
 fi
-printf "Enter the name of your new application (e.g. my-new-app): "
+printf "Enter the name of your new application (default baseline-ai-stack): "
 read -r PROJECT_NAME
+if [ -z "$PROJECT_NAME" ]; then
+    PROJECT_NAME="baseline-ai-stack"
+fi
 sed -i '' -e "s|baseline-ai-stack|$PROJECT_NAME|g" ./scripts/project-variables.sh >/dev/null 2>&1
 sed -i '' -e "s|baseline-ai-stack|$PROJECT_NAME|g" ./scripts/setup.sh >/dev/null 2>&1
 echo

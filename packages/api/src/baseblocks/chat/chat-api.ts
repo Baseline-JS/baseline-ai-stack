@@ -12,6 +12,17 @@ import {
 import { updateUsage, usageService } from '../usage/usage.service';
 import { ModelIdentifiers } from './models';
 
+const MODEL_REGION = 'ap-southeast-2';
+const MODEL_ID = ModelIdentifiers.MISTRAL_MISTRAL_7B_INSTRUCT_V0;
+const MAX_INPUT_TOKENS = 1000;
+const MAX_OUTPUT_TOKENS = 1000;
+const MAX_COMPUTE_MS = 10000;
+const MAX_TOTAL_TOKENS = 0; // No limit
+const GLOBAL_MAX_INPUT_TOKENS = 100000;
+const GLOBAL_MAX_OUTPUT_TOKENS = 100000;
+const GLOBAL_MAX_COMPUTE_MS = 1000000;
+const GLOBAL_MAX_TOTAL_TOKENS = 0; // No limit
+
 const app = createApp();
 export const handler = createAuthenticatedHandler(app);
 
@@ -30,10 +41,10 @@ app.post('/chat/prompt', [
           usedOutputTokens: 0,
           usedComputeMs: 0,
           usedTotalTokens: 0,
-          maxInputTokens: 100000,
-          maxOutputTokens: 100000,
-          maxTotalTokens: 0,
-          maxComputeMs: 1000000,
+          maxInputTokens: GLOBAL_MAX_INPUT_TOKENS,
+          maxOutputTokens: GLOBAL_MAX_OUTPUT_TOKENS,
+          maxTotalTokens: GLOBAL_MAX_TOTAL_TOKENS,
+          maxComputeMs: GLOBAL_MAX_COMPUTE_MS,
         });
       }
       console.log(JSON.stringify(globalUsage, null, 2));
@@ -102,10 +113,10 @@ app.post('/chat/prompt', [
           usedOutputTokens: 0,
           usedComputeMs: 0,
           usedTotalTokens: 0,
-          maxInputTokens: 1000,
-          maxOutputTokens: 1000,
-          maxTotalTokens: 0,
-          maxComputeMs: 10000,
+          maxInputTokens: MAX_INPUT_TOKENS,
+          maxOutputTokens: MAX_OUTPUT_TOKENS,
+          maxTotalTokens: MAX_TOTAL_TOKENS,
+          maxComputeMs: MAX_COMPUTE_MS,
         });
       }
 
@@ -176,11 +187,11 @@ app.post('/chat/prompt', [
         },
       ];
       const runtimeClient = new BedrockRuntimeClient({
-        region: 'ap-southeast-2',
+        region: MODEL_REGION,
       });
 
       const input: ConverseStreamCommandInput = {
-        modelId: ModelIdentifiers.MISTRAL_MISTRAL_7B_INSTRUCT_V0,
+        modelId: MODEL_ID,
         messages,
       };
 

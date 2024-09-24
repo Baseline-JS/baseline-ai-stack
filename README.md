@@ -1,10 +1,12 @@
-![1688515420018](https://github.com/Baseline-JS/core/assets/151841910/620fa869-4bca-418d-af2c-3a3f8b2d2719)
+![1688515420018](baseline-ai-stack-logo.png)
 
 # Baseline AI Stack
 
-BaselineJS is an open-source, fullstack TypeScript, serverless first framework designed to make building cloud native applications easier. Our framework utilizes a combination of modern technologies, architectures and operational processes to help teams to efficiently build and deploy robust applications
+BaselineJS AI Stack is an open-source, fullstack TypeScript, serverless first framework designed to make building cloud native applications easier. This is a customized version of BaselineJS that demonstrates how Bedrock AI can be integrated into the BaselineJS framework in a working application.
 
 If you like BaselineJS give us a ⭐️
+
+[Baseline AI Stack](https://github.com/Baseline-JS/baseline-ai-stack)
 
 [Website](https://baselinejs.com/) |
 [Documentation](https://docs.baselinejs.com/) |
@@ -16,24 +18,52 @@ Startups, want $10k USD of AWS Credits to Get Started? [Apply Here](https://shar
 
 # Getting Started
 
-# Videos Walkthroughs
-
-Video walkthroughs setting up Baseline
-
-- [Baseline Demo](https://www.youtube.com/watch?v=db5gxYWAf1E)
-- [Baseline with Windows Subsystem Linux](https://www.youtube.com/watch?v=sxrQxoibUgI)
-- [Baseline with GitHub Codespaces](https://www.youtube.com/watch?v=uvL9PxdijXA)
-
 ## Setup
 
 1. [Install requirements](#local-requirements) `pnpm run install:requirements`
-2. `npx @baselinejs/create-app my-app-name`
+2. `npx @baselinejs/create-ai-stack`
 3. `pnpm install`
 4. `pnpm run setup` to name your project and set the region
 5. `pnpm run aws:profile` to setup your AWS credentials profile (if you have issues please [update aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html]))
-6. `pnpm run deploy:staging` to deploy api/chat
+6. `pnpm run deploy:staging` to deploy api & chat
 7. `pnpm run add:user:staging` to add a chat user to the application
 8. `pnpm run urls:staging` To see your project URLs
+
+### Setup the AI settings
+
+`packages/api/src/baseblocks/chat/chat-api.ts` contains the settings for the AI model. Set them to the desired values. Deploy the application again after changing these settings with `pnpm run deploy:staging`.
+
+The settings are as follows:
+
+```typescript
+const MODEL_REGION = 'ap-southeast-2';
+const MODEL_ID = ModelIdentifiers.MISTRAL_MISTRAL_7B_INSTRUCT_V0;
+const MAX_INPUT_TOKENS = 1000;
+const MAX_OUTPUT_TOKENS = 1000;
+const MAX_COMPUTE_MS = 10000;
+const MAX_TOTAL_TOKENS = 0; // No limit
+const GLOBAL_MAX_INPUT_TOKENS = 100000;
+const GLOBAL_MAX_OUTPUT_TOKENS = 100000;
+const GLOBAL_MAX_COMPUTE_MS = 1000000;
+const GLOBAL_MAX_TOTAL_TOKENS = 0; // No limit
+```
+
+Explanation of the settings:
+
+- `MODEL_REGION`: The region of the AI model.
+- `MODEL_ID`: The ID of the AI model. [See the Bedrock AI docs for list](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
+- `MAX_INPUT_TOKENS`: The maximum number of tokens in the input to the AI model.
+- `MAX_OUTPUT_TOKENS`: The maximum number of tokens in the output from the AI model.
+- `MAX_COMPUTE_MS`: The maximum time in milliseconds the AI model can take to compute.
+- `MAX_TOTAL_TOKENS`: The maximum number of tokens in the input and output combined.
+- `GLOBAL_MAX_INPUT_TOKENS`: The maximum number of tokens in the input to the AI model for all users combined.
+- `GLOBAL_MAX_OUTPUT_TOKENS`: The maximum number of tokens in the output from the AI model for all users combined.
+- `GLOBAL_MAX_COMPUTE_MS`: The maximum time in milliseconds the AI model can take to compute for all users combined.
+- `GLOBAL_MAX_TOTAL_TOKENS`: The maximum number of tokens in the input and output combined for all users combined.
+
+Set any of them to 0 to disable the limit.
+
+The user and global limits will be enforced by the API. If the limits are exceeded, the API will return an error. The user limits are enforced per user, and the global limits are enforced for all users combined. A DynamoDB table is used to store the usage of each user as well as the default values, that way any user can be tracked and the limits can be enforced as well as modified.
 
 ## Local Requirements
 
