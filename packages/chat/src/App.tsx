@@ -11,7 +11,6 @@ import {
 import '@aws-amplify/ui-react/styles.css';
 import Chat from './baseblocks/chat/pages/Chat';
 import User, { userLoader } from './baseblocks/user/pages/User';
-import Subscription from './baseblocks/subscription/pages/Subscription';
 import {
   createRequestHandler,
   getRequestHandler,
@@ -110,7 +109,6 @@ const router = createBrowserRouter([
     loader: protectedLoader,
     children: [
       { path: '/chat', Component: Chat },
-      { path: '/subscription', Component: Subscription },
       { path: '/settings', Component: User, loader: userLoader },
     ],
   },
