@@ -17,9 +17,12 @@ interface Message {
 const ChatContent = (): JSX.Element => {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (prompt.length === 0) return;
+    if (isLoading) return;
+    setIsLoading(true);
     setMessages([
       ...messages,
       { sender: 'User', text: prompt },
@@ -45,6 +48,7 @@ const ChatContent = (): JSX.Element => {
         { sender: 'User', text: prompt },
         { sender: 'AI', text: errorMessage },
       ]);
+      setIsLoading(false);
       return;
     }
     const responseText = response.output.message.content[0].text;
@@ -53,6 +57,7 @@ const ChatContent = (): JSX.Element => {
       { sender: 'User', text: prompt },
       { sender: 'AI', text: responseText },
     ]);
+    setIsLoading(false);
   };
 
   const containerRef = useRef(null);
@@ -136,6 +141,7 @@ const ChatContent = (): JSX.Element => {
         <img
           src="/icons/bolt-circle.svg"
           alt="Send"
+          style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
           onClick={() => {
             void handleSubmit();
           }}
