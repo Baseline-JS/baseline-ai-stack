@@ -16,8 +16,6 @@ USER_PASSWORD=$3
 # Sets REGION, APP_NAME, AWS_REGION, AWS_PROFILE
 . ../../scripts/project-variables.sh
 
-TABLE="${APP_NAME}-${STAGE}-admin"
-
 echo "Getting Cognito User Pool Id from [$STAGE]..."
 . ../../scripts/get-stack-outputs.sh "$STAGE" >/dev/null
 COGNITO_USER_POOL_ID="${UserPoolId:-}"
@@ -97,18 +95,6 @@ USER_SUB=$(aws cognito-idp admin-get-user \
   tr -d '"')
 
 echo "User Sub: [${USER_SUB}]"
-
-if [ "$USER_SUB" ]; then
-  echo "Found user sub, attempting to create DynamoDB record"
-  aws dynamodb put-item \
-    --table-name "${TABLE}" \
-    --item \
-    "{\"userSub\": {\"S\": \"${USER_SUB}\"}, \"userEmail\": {\"S\": \"${USER_EMAIL}\"}}" \
-    --profile "${AWS_PROFILE}" \
-    --region "${REGION}"
-else
-  echo "User sub not found, cannot create DynamoDB record"
-fi
 
 echo "Done!"
 
