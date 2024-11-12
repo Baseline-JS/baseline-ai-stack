@@ -24,9 +24,9 @@
     "pretty": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}' && npx prettier --write '*.{yml,yaml,js}'"
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock-runtime": "3.651.1",
-    "@aws-sdk/client-cognito-identity-provider": "3.530.0",
-    "@aws-sdk/lib-dynamodb": "3.656.0",
+    "@aws-sdk/client-bedrock-runtime": "3.675.0",
+    "@aws-sdk/client-cognito-identity-provider": "3.675.0",
+    "@aws-sdk/lib-dynamodb": "3.675.0",
     "@baseline/types": "workspace:1.0.0",
     "@baselinejs/dynamodb": "0.2.4",
     "aws-lambda": "1.0.7",
@@ -44,10 +44,10 @@
     "@types/node": "20.11.26",
     "esbuild": "0.20.1",
     "prettier": "2.4.1",
-    "serverless": "3.38.0",
+    "serverless": "3.39.0",
     "serverless-dynamodb": "0.2.50",
     "serverless-esbuild": "1.52.1",
-    "serverless-offline": "13.3.3",
+    "serverless-offline": "14.3.3",
     "stylelint": "16.2.1",
     "stylelint-order": "6.0.4",
     "typescript": "5.4.2"
