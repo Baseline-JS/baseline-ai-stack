@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "usageId": "exampleUsageId",
+        "ownerId": "exampleOwnerId",
+        "apiRequests": 100,
+        "usedInputTokens": 5000,
+        "usedOutputTokens": 3000,
+        "usedComputeMs": 200,
+        "usedTotalTokens": 8000,
+        "maxInputTokens": 10000,
+        "maxOutputTokens": 8000,
+        "maxTotalTokens": 18000,
+        "maxComputeMs": 500,
+        "createdAt": "2023-01-01T00:00:00Z",
+        "updatedAt": "2023-01-02T00:00:00Z"
+    },
+    {
+        "usageId": "exampleUsageId2",
+        "ownerId": "exampleOwnerId2",
+        "apiRequests": 200,
+        "usedInputTokens": 10000,
+        "usedOutputTokens": 6000,
+        "usedComputeMs": 400,
+        "usedTotalTokens": 16000,
+        "maxInputTokens": 20000,
+        "maxOutputTokens": 16000,
+        "maxTotalTokens": 36000,
+        "maxComputeMs": 1000,
+        "createdAt": "2023-01-01T00:00:00Z",
+        "updatedAt": "2023-01-02T00:00:00Z"
+    }
+]

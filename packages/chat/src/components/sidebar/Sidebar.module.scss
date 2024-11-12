@@ -1,5 +1,5 @@
 $horizontalPadding: 44px;
-$width: 250px;
+$width: 200px;
 $totalSidebarSize: calc((#{$horizontalPadding} * 2) + #{$width});
 $collapseSize: calc(((#{$horizontalPadding} * 2) + #{$width}) * -1);
 $animationSpeed: 250ms;
@@ -9,11 +9,14 @@ $animationSpeed: 250ms;
   z-index: 3;
   flex: 0 1 auto;
   width: $totalSidebarSize;
+  max-width: $totalSidebarSize;
+  min-width: $totalSidebarSize;
   height: 100vh;
   padding: 48px $horizontalPadding 32px;
   background: #fff;
   transform: translateX(0);
   transition: margin-left $animationSpeed linear;
+  box-shadow: 0 4px 7.8px 0 #0000001a;
 
   .toggler {
     position: absolute;
@@ -49,7 +52,70 @@ $animationSpeed: 250ms;
 
   img {
     height: 40px;
-    object-fit: contain;
+    object-fit: contain; 
+  }
+
+  .logoImage {
+    width: 100%;
+    height: auto;
+  }
+
+  .linksBottom {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding: 48px;
+
+    .externalLinks {
+      padding-top: 10px;
+      display: flex;
+      align-items: center;
+
+      img {
+        padding-left: 2px;
+        padding-right: 2px;
+        width: 34px;
+        height: 34px;
+      }
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+
+      img {
+        flex: 0 0 24px;
+        width: 24px;
+        object-fit: contain;
+      }
+
+      span {
+        margin-left: 15px;
+        color: #707070;
+        font: normal normal 400 14px/20px Montserrat;
+        border-bottom: 1px solid #fff0;
+        transition: border-bottom 150ms ease-in-out;
+      }
+
+      &.active {
+        span {
+          color: #000;
+        }
+
+        pointer-events: none;
+        user-select: none;
+      }
+
+      &:hover {
+        span {
+          border-bottom: thin solid #707070;
+        }
+      }
+    }
   }
 
   .links {
@@ -60,6 +126,15 @@ $animationSpeed: 250ms;
       margin-bottom: 16px;
     }
 
+    .link {
+      background-color: #fafafa;
+      border-color: #eaeaea;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 5px;
+      padding-left: 20px;
+    }
+
     .link,
     .spacer {
       display: flex;
@@ -67,25 +142,20 @@ $animationSpeed: 250ms;
       text-decoration: none;
 
       img {
-        flex: 0 0 20px;
-        width: 20px;
+        flex: 0 0 24px;
+        width: 24px;
         object-fit: contain;
       }
 
       span {
         margin-left: 15px;
         color: #707070;
-        font: normal normal 300 17px/20px Montserrat;
+        font: normal normal 600 14px/20px Montserrat;
         border-bottom: 1px solid #fff0;
         transition: border-bottom 150ms ease-in-out;
       }
 
       &.active {
-        img {
-          /** Since its not an svg in DOM we cant edit fill */
-          filter: brightness(0);
-        }
-
         span {
           color: #000;
         }

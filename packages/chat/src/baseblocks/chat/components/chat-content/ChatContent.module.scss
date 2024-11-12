@@ -2,7 +2,7 @@
 
 .chat {
   height: 100vh;
-  max-height: 90vh;
+  max-height: 100vh;
   width: 100%;
   display: flex;
   flex: auto;
@@ -59,14 +59,22 @@
   }
 
   .conversation {
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 5px;
-    background: #fff;
+    background: #fafafa;
     height: 100%;
     width: 100%;
+    
     overflow: auto;
+
+    .messages {
+      margin-bottom: 50px;
+      max-width: 900px;
+      width: 100%;
+    }
 
     .message {
       max-width: 900px;
@@ -77,7 +85,7 @@
       justify-content: right;
       text-align: left;
       padding: 10px;
-      background: #fff;
+      background: #fafafa;
 
       .text {
         @include global.smallFont();
@@ -87,7 +95,8 @@
         padding: 10px;
         padding-right: 20px;
         padding-left: 20px;
-        background: #ffe7c2;
+        background: #fff0c5;
+        border: 1px solid #eaeaea;
         width: fit-content;
       }
     }
@@ -99,10 +108,19 @@
       justify-content: left;
       text-align: left;
       padding: 15px;
-      background: #fff;
+      background: #fafafa;
       border-radius: 10px;
       margin: 5px;
       width: 90%;
+
+      .aiImage {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        position: relative;
+        top: -20px;
+        left: -30px;
+      }
 
       .text {
         @include global.smallFont();
@@ -111,6 +129,36 @@
         padding-right: 20px;
         background: #fff;
         width: fit-content;
+
+        .actions {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: right;
+          width: 100%;
+          padding: 5px;
+          padding-bottom: 15px;
+
+          img {
+            width: auto;
+            height: 26px;
+            margin-right: 5px;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-radius: 5px;
+            border: 1px solid #fff;
+
+            &:hover {
+              cursor: pointer;
+              border: 1px solid #bababa;
+            }
+
+            &:active {
+              transform: translateY(2px);
+            }
+          }
+        }
 
         code {
           overflow-y: auto;
@@ -142,36 +190,21 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      width: 100%;
-      background: #fff;
 
-      div {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin: 5px;
-        border-radius: 50%;
-        background: #ffe7c2;
-        animation: bounce 0.5s infinite alternate ease-in-out;
+      img {
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
 
-        @keyframes bounce {
-          to {
-            transform: translateY(-20px);
-          }
-
-          from {
-            transform: translateY(0);
-          }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-      }
 
-      div:nth-child(1) {
-        animation-delay: 0.1s;
-      }
-
-      div:nth-child(2) {
-        animation-delay: 0.2s;
+        100% {
+          transform: rotate(360deg);
+        }
       }
     }
   }

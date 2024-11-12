@@ -42,6 +42,10 @@ const ChatContent = (): JSX.Element => {
         if (errorMessage === 'Failed to get response') {
           errorMessage = '**Something went wrong. Please try again.**';
         }
+        if (errorMessage === 'Usage limit exceeded on output tokens') {
+          errorMessage =
+            '**Usage limit exceeded on output tokens. Please try again later.**';
+        }
       }
       setMessages([
         ...messages,
@@ -74,54 +78,73 @@ const ChatContent = (): JSX.Element => {
   return (
     <div className={styles.chat}>
       <div className={styles.conversation} ref={containerRef}>
-        {messages.map((message) => (
-          <div
-            className={`${styles.message} ${
-              message.sender === 'AI' ? styles.ai : ''
-            }`}
-            key={message.text}
-          >
-            <div className={styles.text}>
-              {message.sender === 'AI' ? (
-                message.text === 'Loading...' ? (
-                  <div className={styles.loader}>
-                    <div />
-                    <div />
-                    <div />
-                  </div>
+        <div className={styles.messages}>
+          {messages.map((message) => (
+            <div
+              className={`${styles.message} ${
+                message.sender === 'AI' ? styles.ai : ''
+              }`}
+              key={message.text}
+            >
+              <div className={styles.text}>
+                {message.sender === 'AI' ? (
+                  message.text === 'Loading...' ? (
+                    <div className={styles.loader}>
+                      <img src="/icons/eos-loading.svg" alt="Loading" />
+                    </div>
+                  ) : (
+                    <div>
+                      <img
+                        className={styles.aiImage}
+                        src="/icons/ai-response.svg"
+                        alt={message.sender}
+                      />
+                      <Markdown
+                        remarkPlugins={[remarkGfm, remarkBreaks]}
+                        components={{
+                          code(props) {
+                            // eslint-disable-next-line react/prop-types, @typescript-eslint/no-unused-vars
+                            const { children, className, node, ...rest } =
+                              props;
+                            const match = /language-(\w+)/.exec(
+                              className || '',
+                            );
+                            return match ? (
+                              <SyntaxHighlighter
+                                {...rest}
+                                PreTag="div"
+                                // eslint-disable-next-line react/no-children-prop
+                                children={String(children)}
+                                language={match[1]}
+                                style={dark}
+                                ref={null}
+                              />
+                            ) : (
+                              <code {...rest}>{children}</code>
+                            );
+                          },
+                        }}
+                      >
+                        {message.text}
+                      </Markdown>
+                      <div className={styles.actions}>
+                        <img
+                          src="/icons/copy.svg"
+                          alt="Copy"
+                          onClick={() => {
+                            void navigator.clipboard.writeText(message.text);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )
                 ) : (
-                  <Markdown
-                    remarkPlugins={[remarkGfm, remarkBreaks]}
-                    components={{
-                      code(props) {
-                        // eslint-disable-next-line react/prop-types, @typescript-eslint/no-unused-vars
-                        const { children, className, node, ...rest } = props;
-                        const match = /language-(\w+)/.exec(className || '');
-                        return match ? (
-                          <SyntaxHighlighter
-                            {...rest}
-                            PreTag="div"
-                            // eslint-disable-next-line react/no-children-prop
-                            children={String(children)}
-                            language={match[1]}
-                            style={dark}
-                            ref={null}
-                          />
-                        ) : (
-                          <code {...rest}>{children}</code>
-                        );
-                      },
-                    }}
-                  >
-                    {message.text}
-                  </Markdown>
-                )
-              ) : (
-                message.text
-              )}
+                  message.text
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <div className={styles.input}>
@@ -139,7 +162,7 @@ const ChatContent = (): JSX.Element => {
           }}
         />
         <img
-          src="/icons/bolt-circle.svg"
+          src="/icons/send.svg"
           alt="Send"
           style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
           onClick={() => {
