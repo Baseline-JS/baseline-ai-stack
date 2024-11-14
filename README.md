@@ -8,6 +8,7 @@ If you like BaselineJS give us a ⭐️
 
 [Baseline AI Stack](https://github.com/Baseline-JS/baseline-ai-stack)
 
+[Baseline](https://github.com/Baseline-JS/core) |
 [Website](https://baselinejs.com/) |
 [Documentation](https://docs.baselinejs.com/) |
 [Discord](https://discord.gg/beCj9VDeMm) |
@@ -18,7 +19,23 @@ Startups, want $10k USD of AWS Credits to Get Started? [Apply Here](https://shar
 
 # Getting Started
 
+You have 3 different options to setup Baseline AI Stack:
+
+1. [Workshop Form](#workshop-form)
+2. [Quickstart](#quickstart)
+3. [Setup](#setup)
+
+## Workshop Form
+
+A simplified deployment to try out the Baseline AI Stack can be found at [Baseline AI Workshop](https://baselinejs.com/workshop-ai). This will guide you through the process of deploying the Baseline AI Stack to your AWS account. This is the easiest no code way to get started.
+
+## Quickstart
+
+1. `npx @baselinejs/quickstart-ai` and follow the setup instructions
+
 ## Setup
+
+Alternatively, follow the setup instructions below.
 
 1. [Install requirements](#local-requirements) `pnpm run install:requirements`
 2. `npx @baselinejs/create-ai-stack`
@@ -38,13 +55,13 @@ The settings are as follows:
 ```typescript
 const MODEL_REGION = 'ap-southeast-2';
 const MODEL_ID = ModelIdentifiers.MISTRAL_MISTRAL_7B_INSTRUCT_V0;
-const MAX_INPUT_TOKENS = 1000;
-const MAX_OUTPUT_TOKENS = 1000;
-const MAX_COMPUTE_MS = 10000;
+const MAX_INPUT_TOKENS = 100000;
+const MAX_OUTPUT_TOKENS = 100000;
+const MAX_COMPUTE_MS = 1000000;
 const MAX_TOTAL_TOKENS = 0; // No limit
-const GLOBAL_MAX_INPUT_TOKENS = 100000;
-const GLOBAL_MAX_OUTPUT_TOKENS = 100000;
-const GLOBAL_MAX_COMPUTE_MS = 1000000;
+const GLOBAL_MAX_INPUT_TOKENS = 1000000;
+const GLOBAL_MAX_OUTPUT_TOKENS = 1000000;
+const GLOBAL_MAX_COMPUTE_MS = 10000000;
 const GLOBAL_MAX_TOTAL_TOKENS = 0; // No limit
 ```
 
