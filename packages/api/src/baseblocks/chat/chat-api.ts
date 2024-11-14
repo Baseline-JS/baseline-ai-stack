@@ -14,13 +14,13 @@ import { ModelIdentifiers } from './models';
 
 const MODEL_REGION = 'ap-southeast-2';
 const MODEL_ID = ModelIdentifiers.MISTRAL_MISTRAL_7B_INSTRUCT_V0;
-const MAX_INPUT_TOKENS = 1000;
-const MAX_OUTPUT_TOKENS = 1000;
-const MAX_COMPUTE_MS = 10000;
+const MAX_INPUT_TOKENS = 100000;
+const MAX_OUTPUT_TOKENS = 100000;
+const MAX_COMPUTE_MS = 1000000;
 const MAX_TOTAL_TOKENS = 0; // No limit
-const GLOBAL_MAX_INPUT_TOKENS = 100000;
-const GLOBAL_MAX_OUTPUT_TOKENS = 100000;
-const GLOBAL_MAX_COMPUTE_MS = 1000000;
+const GLOBAL_MAX_INPUT_TOKENS = 1000000;
+const GLOBAL_MAX_OUTPUT_TOKENS = 1000000;
+const GLOBAL_MAX_COMPUTE_MS = 10000000;
 const GLOBAL_MAX_TOTAL_TOKENS = 0; // No limit
 
 const app = createApp();
