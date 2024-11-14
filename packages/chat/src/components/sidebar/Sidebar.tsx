@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Sidebar.module.scss';
 
 const Sidebar = (): JSX.Element => {
   const location = useLocation();
-  const [isToggled, setIsToggled] = useState(false);
-
-  useEffect(() => {
-    if (window.innerWidth < 400) {
-      setIsToggled(true);
-    }
-  }, []);
+  const [isToggled, setIsToggled] = useState(window.innerWidth < 600);
 
   return (
     <div className={`${styles.sidebar} ${isToggled ? styles.collapsed : ''}`}>

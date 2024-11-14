@@ -1,6 +1,6 @@
 {
   "name": "@baselinejs/ai-stack",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
