@@ -38,7 +38,7 @@ A simplified deployment to try out the Baseline AI Stack can be found at [Baseli
 Alternatively, follow the setup instructions below.
 
 1. [Install requirements](#local-requirements) `pnpm run install:requirements`
-2. `npx @baselinejs/create-ai-stack`
+2. `npx @baselinejs/create-ai`
 3. `pnpm install`
 4. `pnpm run setup` to name your project and set the region
 5. `pnpm run aws:profile` to setup your AWS credentials profile (if you have issues please [update aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html]))

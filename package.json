@@ -1,6 +1,7 @@
 {
   "name": "@baselinejs/ai-stack",
-  "version": "0.0.5",
+  "description": "A AI chat app built on Baseline",
+  "version": "0.0.6",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
