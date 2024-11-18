@@ -1,4 +1,5 @@
-![1688515420018](baseline-ai-stack-logo.png)
+<img width="1253" alt="image" src="https://github.com/user-attachments/assets/2a5e7395-a2e9-4caf-9496-e3c60f2d436c">
+
 
 # Baseline AI Stack
 
@@ -16,6 +17,8 @@ If you like BaselineJS give us a ⭐️
 [YouTube](https://www.youtube.com/@Baseline-JS)
 
 Startups, want $10k USD of AWS Credits to Get Started? [Apply Here](https://share.hsforms.com/1P6p_G9Q_Q-SJAESAYtLftgqm3as)
+
+![baseline-ai-stack-demo](https://github.com/user-attachments/assets/d4439104-8a58-4adc-b73d-f17b7bd013f1)
 
 # Getting Started
 
